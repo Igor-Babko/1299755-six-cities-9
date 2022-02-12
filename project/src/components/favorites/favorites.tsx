@@ -1,4 +1,4 @@
-<main className="page__main page__main--favorites">
+<main class="page__main page__main--favorites">
         <div class="page__favorites-container container">
           <section class="favorites">
             <h1 class="favorites__title">Saved listing</h1>

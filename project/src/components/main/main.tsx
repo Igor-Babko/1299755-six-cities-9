@@ -3,7 +3,7 @@ import Card from '../card/card';
 
 // }
 
-function MainScreen(props: object):JSX.Element {
+function MainScreen():JSX.Element {
 
   return (
     <main className="page__main page__main--index">
@@ -65,11 +65,11 @@ function MainScreen(props: object):JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-            {Card}
-            {Card}
-            {Card}
-            {Card}
-            {Card}
+              {Card}
+              {Card}
+              {Card}
+              {Card}
+              {Card}
             </div>
           </section>
           <div className="cities__right-section">
@@ -80,3 +80,5 @@ function MainScreen(props: object):JSX.Element {
     </main>
   );
 }
+
+export default MainScreen;
