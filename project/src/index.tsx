@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
 const Settings = {
-  AMOUNT_OFFERS : 555,
+  OFFERS_COUNT : 555,
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App amountOffers = {Settings.AMOUNT_OFFERS} />
+    <App amountOffers = {Settings.OFFERS_COUNT} />
   </React.StrictMode>,
   document.getElementById('root'));

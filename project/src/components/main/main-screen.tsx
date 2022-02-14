@@ -64,11 +64,11 @@ function MainScreen({amountOffers}: MainScreenProps):JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {Card()}
-              {Card()}
-              {Card()}
-              {Card()}
-              {Card()}
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
+              <Card/>
             </div>
           </section>
           <div className="cities__right-section">
