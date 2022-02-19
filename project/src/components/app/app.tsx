@@ -1,4 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import MainScreen from '../main/main-screen';
 import Layout from '../layout/layout';
 import Login from '../login/login';
@@ -15,11 +16,11 @@ function App({amountOffers}:AppScreeenProps ): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
-        <Route path ='/' element ={<Layout />}>
+        <Route path = {AppRoute.Root} element ={<Layout />}>
           <Route index element = {<MainScreen amountOffers = {amountOffers} />}/>;
-          <Route path ='/login' element = {<Login />}/>
-          <Route path ='/favorites' element = {<PrivateRoute><Favorites /></PrivateRoute>}/>
-          <Route path ='/offer' element = {<Card />}>
+          <Route path = {AppRoute.Login} element = {<Login />}/>
+          <Route path = {AppRoute.Favorites} element = {<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorites /></PrivateRoute>}/>
+          <Route path ={AppRoute.Offer} element = {<Card />}>
             <Route path=':id' element={<Card/>}/>
           </Route>
         </Route>
