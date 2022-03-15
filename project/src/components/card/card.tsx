@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer-type';
 import { FilmList } from './../offers-list/offers-list';
 
 export function Card(props : Offer) : JSX.Element{
+=======
+import { Link} from 'react-router-dom';
+import { Offer } from '../../types/offer-type';
+import { FilmList } from './../offers-list/offers-list';
+
+
+export function Card(props : Offer) : JSX.Element{
+
+>>>>>>> module4-taks1-2
   const {previewImage, title, isPremium, rating, type, price} = props;
   const percentRating = rating * 100 / 5;
   return (
@@ -10,7 +20,11 @@ export function Card(props : Offer) : JSX.Element{
       <div>
         {isPremium && <div></div>}
         <div className="cities__image-wrapper place-card__image-wrapper">
+<<<<<<< HEAD
           <Link to="/">
+=======
+          <Link to='/offer:id'>
+>>>>>>> module4-taks1-2
             <img className="place-card__image" src= {previewImage} width={260} height={200} alt="Place" />
           </Link>
         </div>
