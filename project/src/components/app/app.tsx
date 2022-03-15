@@ -26,7 +26,7 @@ function App({amountOffers, offers}:AppScreeenProps ): JSX.Element {
           <Route path = {AppRoute.Login} element = {<Login />}/>
           <Route path = {AppRoute.Favorites} element = {<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorites /></PrivateRoute>}/>
           <Route path ={AppRoute.Offer} element = {<FilmList offers = {offers} />}>
-            <Route path=':id' element={<Room offer = {offers[0]}/>}/>
+            <Route path=':id' element={<Room offer={offers[0]} />}/>
           </Route>
         </Route>
         <Route path = '*' element = {<PageNotFound /> }/>
