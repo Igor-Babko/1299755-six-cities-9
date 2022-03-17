@@ -1,23 +1,10 @@
-
-export type Location = {
-  latitude: number,
-  longitude : number,
-  zoom : number
-}
-
-export type City = {
-  name: string,
-  location: Location,
-}
-
-export type Host = {
-  'id':number,
-  'name':string,
-  'isPro':boolean,
-  'avatarUrl':string,
-}
 export type Offer = {
-  city: City,
+  city: {
+    name: string,
+    location: {
+      latitude: number,
+      longitude : number,
+      zoom : number}},
   previewImage: string,
   images: string[],
   title: string,
@@ -29,9 +16,17 @@ export type Offer = {
   maxAdults: number,
   price:number,
   goods:string[],
-  host:Host,
+  host:{
+    'id':number,
+    'name':string,
+    'isPro':boolean,
+    'avatarUrl':string,
+  },
   description:string,
-  location:Location,
+  location:{
+    latitude: number,
+    longitude : number,
+    zoom : number}
   id:number,
 }
 

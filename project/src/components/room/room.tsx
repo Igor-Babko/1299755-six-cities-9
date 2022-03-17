@@ -1,6 +1,6 @@
 import {Offer} from '../../types/offer-type';
 import { CommentForm } from './../comment-form/comment-form';
-
+import {percentRating} from '../../utils/utils';
 
 type Props = {
 offer:Offer
@@ -9,7 +9,7 @@ offer:Offer
 
 export function Room({offer}:Props):JSX.Element {
   const {title, isPremium, rating, type, price, images, bedrooms, maxAdults, goods, host, description} = offer;
-  const percentRating = rating * 100 / 5;
+
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -39,7 +39,7 @@ export function Room({offer}:Props):JSX.Element {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{width: `${percentRating}%`}} />
+                <span style={{width: `${percentRating(rating)}%`}} />
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">4.8</span>
