@@ -4,13 +4,11 @@ import MainScreen from '../main/main-screen';
 import Layout from '../layout/layout';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
-//import Card from '../card/card';
 import PageNotFound from '../page-not-found/page-not-found';
 import PrivateRoute from './../private-route/private-route';
 import {Offer} from '../../types/offer-type';
 import { FilmList } from './../offers-list/offers-list';
 import {Room} from '../room/room';
-
 
 type AppScreeenProps = {
   amountOffers : number,
