@@ -1,5 +1,8 @@
-import Card from '../card/card';
+
 import {Link} from 'react-router-dom';
+import { offers } from './../../mocks/offers';
+import { FilmList } from './../offers-list/offers-list';
+
 
 type MainScreenProps = {
   amountOffers:number;
@@ -66,11 +69,7 @@ function MainScreen({amountOffers}: MainScreenProps):JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+              <FilmList offers={offers} />
             </div>
           </section>
           <div className="cities__right-section">
