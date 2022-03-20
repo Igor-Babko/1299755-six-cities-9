@@ -11,3 +11,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const URL_PIN_DEFAULT = 'img/pin.svg';
+export const URL_PIN_CURRENT = 'img/pin-active.svg';
+
+export const PIN_WIDTH = 42;
+export const PIN_HEIGHT = 68;

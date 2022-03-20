@@ -1,15 +1,15 @@
 import { Offer } from '../../types/offer-type';
-import React from 'react';
 import { Card } from './../card/card';
 
 type Props = {
-   offers: Offer[];
+   offers: Offer[],
+   onOfferCardHover(offer: Offer): void
 };
 
-export function FilmList (props: Props): JSX.Element{
+export function FilmList ({offers, onOfferCardHover}: Props): JSX.Element{
   return (
     <div className = "cities__places-list places__list tabs__content">
-      {props.offers.map((offer) => (<Card key={offer.id} {...offer} />))}
+      {offers.map((offer) => (<Card key={offer.id} offer={offer} onMouseOver={onOfferCardHover}/>))}
     </div>
   );
 }

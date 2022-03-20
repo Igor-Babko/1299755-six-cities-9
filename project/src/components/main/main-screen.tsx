@@ -2,13 +2,19 @@
 import {Link} from 'react-router-dom';
 import { offers } from './../../mocks/offers';
 import { FilmList } from './../offers-list/offers-list';
-
+import { useState } from 'react';
+import Map from '../map/map';
+import { Offer } from '../../types/offer-type';
 
 type MainScreenProps = {
   amountOffers:number;
 }
 
 function MainScreen({amountOffers}: MainScreenProps):JSX.Element {
+  const city = offers[0].city;
+
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -69,11 +75,11 @@ function MainScreen({amountOffers}: MainScreenProps):JSX.Element {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <FilmList offers={offers} />
+              <FilmList onOfferCardHover={setSelectedOffer} offers={offers} />
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map city={city} offers={offers} selectedOffer={selectedOffer}/>
           </div>
         </div>
       </div>

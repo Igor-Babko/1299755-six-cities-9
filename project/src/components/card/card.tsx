@@ -3,10 +3,18 @@ import { Offer } from '../../types/offer-type';
 import { FilmList } from './../offers-list/offers-list';
 import {percentRating} from '../../utils/utils';
 
-export function Card(props : Offer) : JSX.Element{
-  const {id, previewImage, title, isPremium, rating, type, price} = props;
+type CardProps = {
+  offer: Offer,
+  onMouseOver(offer: Offer): void
+};
+
+export function Card({offer, onMouseOver}: CardProps) : JSX.Element{
+  const {id, previewImage, title, isPremium, rating, type, price} = offer;
+  const handleMouseOver = () => {
+    onMouseOver(offer);
+  };
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseOver={handleMouseOver}>
       <div>
         {isPremium && <div></div>}
         <div className="cities__image-wrapper place-card__image-wrapper">

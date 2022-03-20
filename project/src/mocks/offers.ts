@@ -14,7 +14,7 @@ export const offers : Offer[] = [
     'goods':['Coffee machine','Breakfast','Laptop friendly workspace','Fridge','Baby seat','Air conditioning','Washer','Towels','Washing machine','Dishwasher'],
     'host':{'id':25,'name':'Angelina','isPro':true,'avatarUrl':'img/avatar-angelina.jpg'},
     'description':'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-    'location':{'latitude':50.916361,'longitude':6.944974,'zoom':16},
+    'location':{'latitude':52.3909553943508,'longitude':4.85309666406198,'zoom':16},
     'id':1},
 
   {'city':{'name':'Paris','location':{'latitude':48.85661,'longitude':2.351499,'zoom':13}},
@@ -31,7 +31,7 @@ export const offers : Offer[] = [
     'goods':['Breakfast','Laptop friendly workspace','Washer','Baby seat','Air conditioning'],
     'host':{'id':25,'name':'Angelina','isPro':true,'avatarUrl':'img/avatar-angelina.jpg'},
     'description':'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
-    'location':{'latitude':48.843610000000005,'longitude':2.338499,'zoom':16},
+    'location':{'latitude':52.369553943508,'longitude':4.85309666406198,'zoom':16},
     'id':2},
 
   {'city':{'name':'Hamburg',
@@ -49,7 +49,7 @@ export const offers : Offer[] = [
   'goods':['Laptop friendly workspace','Washer','Towels','Baby seat','Air conditioning','Breakfast','Fridge'],
   'host':{'id':25,'name':'Angelina','isPro':true,'avatarUrl':'img/avatar-angelina.jpg'},
   'description':'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-  'location':{'latitude':53.529341,'longitude':9.975654,'zoom':16},
+  'location':{'latitude':52.3909553943508,'longitude':4.929309666406198,'zoom':16},
   'id':3},
 
   {'city':{'name':'Brussels',
@@ -67,6 +67,6 @@ export const offers : Offer[] = [
   'goods':['Washer','Laptop friendly workspace','Breakfast'],
   'host':{'id':25,'name':'Angelina','isPro':true,'avatarUrl':'img/avatar-angelina.jpg'},
   'description':'I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!',
-  'location':{'latitude':50.842557,'longitude':4.3536969999999995,'zoom':16},
+  'location':{'latitude':52.3809553943508,'longitude':4.939309666406198,'zoom':16},
   'id':4}];
 

@@ -1,10 +1,17 @@
-export type Offer = {
-  city: {
-    name: string,
-    location: {
+export type City = {
+  name: string,
+  location: {
+    latitude: number,
+    longitude : number,
+    zoom : number}}
+
+export type Location ={
       latitude: number,
       longitude : number,
-      zoom : number}},
+      zoom : number}
+
+export type Offer = {
+  city: City,
   previewImage: string,
   images: string[],
   title: string,
@@ -23,10 +30,7 @@ export type Offer = {
     'avatarUrl':string,
   },
   description:string,
-  location:{
-    latitude: number,
-    longitude : number,
-    zoom : number}
+  location:Location,
   id:number,
 }
 
