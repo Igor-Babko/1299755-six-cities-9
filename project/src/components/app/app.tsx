@@ -1,30 +1,59 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import MainScreen from '../main/main-screen';
-import Layout from '../layout/layout';
-import Login from '../login/login';
-import Favorites from '../favorites/favorites';
-import PageNotFound from '../page-not-found/page-not-found';
-import PrivateRoute from './../private-route/private-route';
-import {Offer} from '../../types/offer-type';
-import {Room} from '../room/room';
+import AllRentalOffersPage from '../all-rental-offers-page/all-rental-offers-page';
+import FavoritesPage from '../favorites-page/favorites-page';
+import NotFoundPage from '../not-found-page/not-found-page';
+import PrivateRoute from '../../private-route/private-route';
+import RentalOfferPage from '../rental-offer-page/rental-offer-page';
+import SignInPage from '../sign-in-page/sign-in-page';
+import { Offer } from '../../types/offer';
+import { Review } from '../../types/rewiew';
 
-type AppScreeenProps = {
-  amountOffers : number,
-  offers : Offer[];
-  }
+type AppProps = {
+  stayPlacesCount: number,
+  offers: Offer[],
+  reviews: Review[]
+};
 
-function App({amountOffers, offers}:AppScreeenProps ): JSX.Element {
-  return(
+function App({stayPlacesCount, offers, reviews}: AppProps): JSX.Element {
+  return (
     <BrowserRouter>
       <Routes>
-        <Route path = {AppRoute.Root} element ={<Layout />}>
-          <Route index element = {<MainScreen amountOffers = {amountOffers} />}/>;
-          <Route path = {AppRoute.Login} element = {<Login />}/>
-          <Route path = {AppRoute.Favorites} element = {<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorites /></PrivateRoute>}/>
-          <Route path={AppRoute.Room} element={<Room offer={offers[0]} />}/>
-        </Route>
-        <Route path = '*' element = {<PageNotFound /> }/>
+        <Route
+          path={AppRoute.Main}
+          element={
+            <AllRentalOffersPage
+              stayPlacesCount={stayPlacesCount}
+              offers={offers}
+            />
+          }
+        />
+        <Route
+          path={AppRoute.SignIn}
+          element={
+            <SignInPage/>
+          }
+        />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <FavoritesPage offers={offers}/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path={AppRoute.Room}
+          element={
+            <RentalOfferPage reviews={reviews}/>
+          }
+        />
+        <Route
+          path={AppRoute.NotFound}
+          element={
+            <NotFoundPage/>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
