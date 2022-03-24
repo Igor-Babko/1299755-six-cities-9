@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 type PrivateRouteProps = PropsWithChildren<{
   authorizationStatus: AuthorizationStatus
