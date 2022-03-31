@@ -1,13 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { SortType } from '../const';
+import { AuthorizationStatus, SortType } from '../const';
 import { CityOffers } from '../types/offer';
-import { changeCityAction, changeSortOptionAction, fillOffersAction, loadOffersAction } from './action';
+import { changeAuthorizationStatusAction, changeCityAction, changeSortOptionAction, fillOffersAction, loadOffersAction } from './action';
+
 const initialState: CityOffers = {
   city: 'Paris',
   offers: [],
   allOffers: [],
   sortType: SortType.Popular,
   areAllOffersLoaded: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -26,5 +28,8 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffersAction, (state, action) => {
       state.allOffers = action.payload;
       state.areAllOffersLoaded = true;
+    })
+    .addCase(changeAuthorizationStatusAction, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
