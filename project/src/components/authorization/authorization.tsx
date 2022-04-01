@@ -1,11 +1,30 @@
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { AppRoute } from '../../const';
 import { getAuthInfo } from '../../services/token';
-function Authorization() {
-  const { authorizationStatus } = useAppSelector((state) => state);
+import { MouseEvent } from 'react';
+import { removeAuthAction } from '../../store/api-actions';
+
+type AuthorizationProps = {
+  onSignOut?: () => void
+}
+
+function Authorization({onSignOut}: AuthorizationProps) {
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const dispatch =  useAppDispatch();
+
   const authInfo = getAuthInfo();
+
+  const handleSignOut = (evt: MouseEvent) => {
+    evt.preventDefault();
+
+    dispatch(removeAuthAction());
+    if (onSignOut !== undefined) {
+      onSignOut();
+    }
+  };
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -13,15 +32,22 @@ function Authorization() {
           authorizationStatus === AuthorizationStatus.Auth &&
           <>
             <li className="header__nav-item user">
-              <a className="header__nav-link header__nav-link--profile" href="/">
+              <Link
+                className="header__nav-link header__nav-link--profile"
+                to={AppRoute.Favorites}
+              >
                 <div className="header__avatar-wrapper user__avatar-wrapper">
                   <img width="20" height="20" alt="ava" src={authInfo?.avatarUrl}/>
                 </div>
                 <span className="header__user-name user__name">{authInfo?.email}</span>
-              </a>
+              </Link>
             </li>
             <li className="header__nav-item">
-              <a className="header__nav-link" href="/">
+              <a
+                className="header__nav-link"
+                href="/"
+                onClick={handleSignOut}
+              >
                 <span className="header__signout">Sign out</span>
               </a>
             </li>
@@ -44,4 +70,5 @@ function Authorization() {
     </nav>
   );
 }
+
 export default Authorization;
