@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { MouseEvent } from 'react';
-import { changeCityAction } from '../../store/action';
+import { changeCity } from '../../store/rental/rental';
 
 type CityProps = {
-  cities: string[],
+  cities: string[]
 }
+
 function Cities({cities}: CityProps) {
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector(({RENTAL}) => RENTAL.city);
   const dispatch = useAppDispatch();
 
   return (
@@ -24,7 +25,7 @@ function Cities({cities}: CityProps) {
                 onClick={
                   (evt: MouseEvent) => {
                     evt.preventDefault();
-                    dispatch(changeCityAction(city));
+                    dispatch(changeCity(city));
                   }
                 }
               >
@@ -37,4 +38,5 @@ function Cities({cities}: CityProps) {
     </section>
   );
 }
+
 export default Cities;

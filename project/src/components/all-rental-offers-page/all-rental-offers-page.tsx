@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { cities } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { getOffers } from '../../rental';
-import { fillOffersAction } from '../../store/action';
+import { fillOffers } from '../../store/rental/rental';
 import { CityContent } from '../../types/offer';
 import Authorization from '../authorization/authorization';
 import Cities from '../cities/cities';
 import Loader from '../loader/loader';
 import MainCityRentalOffers from '../main-city-rental-offers/main-city-rental-offers';
 import NoRentalOffers from '../no-rental-offers/no-rental-offers';
+
 const getCitiesContent = ({currentOffers, cityName, areAllOffersLoaded}: CityContent) => {
   if (!areAllOffersLoaded) {
     return (
       <Loader/>
     );
   }
+
   return (
     currentOffers.length > 0
       ? (
@@ -27,15 +28,20 @@ const getCitiesContent = ({currentOffers, cityName, areAllOffersLoaded}: CityCon
       : <NoRentalOffers cityName={cityName}/>
   );
 };
+
 function AllRentalOffersPage() {
-  const tempState = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const currentOffers = tempState.offers;
-  const cityName = tempState.city;
-  const { sortType, areAllOffersLoaded, allOffers } = tempState;
+
+  const tempState = useAppSelector((state) => state);
+  const { offers, city } = tempState.RENTAL;
+  const { areAllOffersLoaded, allOffers } = tempState.OFFERS_DATA;
+
   useEffect(() => {
-    dispatch(fillOffersAction(getOffers(cityName, allOffers, sortType)));
-  }, [allOffers, cityName, dispatch, sortType]);
+    const cityOffers = allOffers
+      .filter((offer) => offer.city.name === city);
+    dispatch(fillOffers(cityOffers));
+  }, [allOffers, city, dispatch]);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -50,7 +56,8 @@ function AllRentalOffersPage() {
           </div>
         </div>
       </header>
-      <main className={`page__main page__main--index${currentOffers.length === 0 ? ' page__main--index-empty' : ''}`}>
+
+      <main className={`page__main page__main--index${offers.length === 0 ? ' page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <Cities cities={cities}/>
@@ -58,9 +65,9 @@ function AllRentalOffersPage() {
         <div className="cities">
           {
             getCitiesContent({
-              areAllOffersLoaded: areAllOffersLoaded,
-              cityName: cityName,
-              currentOffers: currentOffers,
+              areAllOffersLoaded,
+              cityName: city,
+              currentOffers: offers,
             })
           }
         </div>
@@ -68,4 +75,5 @@ function AllRentalOffersPage() {
     </div>
   );
 }
+
 export default AllRentalOffersPage;

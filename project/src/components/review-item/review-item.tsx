@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { getRatingPercent } from '../../const';
-import { Review } from '../../types/rewiew';
+import { Review } from '../../types/review';
 
 type ReviewItemProps = {
   review: Review

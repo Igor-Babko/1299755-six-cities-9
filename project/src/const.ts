@@ -1,3 +1,5 @@
+import { HouseType, Offer } from './types/offer';
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -54,9 +56,52 @@ export enum APIRoute {
   Logout =  '/logout'
 }
 
-
 export enum HTTP_CODE {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
+
+export enum NameSpace {
+  OffersData = 'OFFERS_DATA',
+  ReviewsData = 'REVIEWS_DATA',
+  User = 'USER',
+  Rental = 'RENTAL'
+}
+
+export const OFFER_DEFAULT_ID = -1;
+
+export const DEFAULT_OFFER: Offer = {
+  id: OFFER_DEFAULT_ID,
+  city: {
+    name: '',
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    },
+  },
+  bedroomsCount: 0,
+  description: '',
+  guestsCount: 0,
+  header: '',
+  houseType: HouseType.Apartment,
+  householdItems: [],
+  images: [],
+  isFavorite: false,
+  isPremium: false,
+  location: {
+    latitude: 0,
+    longitude: 0,
+    zoom: 0,
+  },
+  owner: {
+    id: 0,
+    avatarImage: '',
+    isPro: false,
+    name: '',
+  },
+  previewImage: '',
+  price: 0,
+  rating: 0,
+};
