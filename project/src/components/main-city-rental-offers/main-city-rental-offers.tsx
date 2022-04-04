@@ -8,6 +8,7 @@ type MainCityRentalOffersProps = {
   cityName: string,
   city: City,
 };
+
 function MainCityRentalOffers({currentOffers, cityName, city}: MainCityRentalOffersProps) {
   const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
   return (
@@ -15,7 +16,10 @@ function MainCityRentalOffers({currentOffers, cityName, city}: MainCityRentalOff
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{currentOffers.length} places to stay in {cityName}</b>
-        <SortedRentalOfferCards onOfferCardHover={setSelectedOffer}/>
+        <SortedRentalOfferCards
+          onOfferCardHover={setSelectedOffer}
+          sortedOffers={currentOffers}
+        />
       </section>
       <div className="cities__right-section">
         <Map
@@ -28,4 +32,5 @@ function MainCityRentalOffers({currentOffers, cityName, city}: MainCityRentalOff
     </div>
   );
 }
+
 export default MainCityRentalOffers;

@@ -1,34 +1,39 @@
 import { Icon, Map as LeafLetMap, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
-import { PIN_HEIGHT, PIN_WIDTH, URL_PIN_CURRENT, URL_PIN_DEFAULT } from '../../const';
+import { PinSize, PinURL } from '../../const';
 import useMap from '../../hooks/use-map';
 import { City, Offer } from '../../types/offer';
+
 type MapProps = {
   city: City,
   offers: Offer[],
   selectedOffer: Offer | null,
   className: string,
 };
-// Получение иконки пина в записимости от текущего предложения
+
+
 const getIcon = (selectedOffer: Offer | null, offer: Offer) => {
   let icon: Icon;
-  const halfWidth = 0.5 * PIN_WIDTH;
+  const halfWidth = 0.5 * PinSize.Width;
+
   if (selectedOffer !== null) {
     if (selectedOffer.id === offer.id) {
       icon = new Icon({
-        iconUrl: URL_PIN_CURRENT,
-        iconSize: [PIN_WIDTH, PIN_HEIGHT],
-        iconAnchor: [halfWidth, PIN_HEIGHT],
+        iconUrl: PinURL.Current,
+        iconSize: [PinSize.Width, PinSize.Height],
+        iconAnchor: [halfWidth, PinSize.Height],
       });
       return icon;
     }
   }
+
   icon = new Icon({
-    iconUrl: URL_PIN_DEFAULT,
-    iconSize: [PIN_WIDTH, PIN_HEIGHT],
-    iconAnchor: [halfWidth, PIN_HEIGHT],
+    iconUrl: PinURL.Default,
+    iconSize: [PinSize.Width, PinSize.Height],
+    iconAnchor: [halfWidth, PinSize.Height],
   });
+
   return icon;
 };
 
@@ -81,4 +86,5 @@ function Map({
     </section>
   );
 }
+
 export default  Map;

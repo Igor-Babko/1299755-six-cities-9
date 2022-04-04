@@ -15,4 +15,5 @@ function NoRentalOffers({cityName}: NoRentalOffersProps) {
     </div>
   );
 }
+
 export default NoRentalOffers;

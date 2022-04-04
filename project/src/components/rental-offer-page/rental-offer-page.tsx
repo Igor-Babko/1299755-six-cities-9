@@ -1,15 +1,17 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import SubmitReviewForm from '../submit-review-form/submit-review-form';
-import { AppRoute, AuthorizationStatus, getRatingPercent, OFFER_DEFAULT_ID } from '../../const';
+import { AppRoute, AuthorizationStatus, BookmarkStatus, getRatingPercent, MaxObjectNumber, OFFER_DEFAULT_ID } from '../../const';
 import Reviews from '../reviews/reviews';
 import Map from '../map/map';
 import { PlaceCardType } from '../../types/offer';
 import RentalOfferCards from '../rental-offer-cards/rental-offer-cards';
 import './css/map.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import Authorization from '../authorization/authorization';
 import { MouseEvent, useEffect, useState } from 'react';
-import { getNearOffersAction, getOfferAction, getReviewsAction, setIsFavoriteAction } from '../../store/api-actions';
+import { fetchOffersAction, getNearOffersAction, getOfferAction, getReviewsAction, setIsFavoriteAction } from '../../store/api-actions';
+import { getCurrentOffer, getIsOfferExist, getNearOffers } from '../../store/offers-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import Header from '../header/header';
 
 function RentalOfferPage() {
   const { pathname } = useLocation();
@@ -19,8 +21,11 @@ function RentalOfferPage() {
 
   const dispatch = useAppDispatch();
 
-  const { currentOffer, nearOffers, isOfferExist } = useAppSelector(({OFFERS_DATA}) => OFFERS_DATA);
-  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const isOfferExist = useAppSelector(getIsOfferExist);
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(currentOffer.isFavorite);
@@ -41,46 +46,35 @@ function RentalOfferPage() {
     return null;
   }
 
-  const handleAddToFavorites = (evt: MouseEvent) => {
+  const handleAddToFavorites = async (evt: MouseEvent) => {
     evt.preventDefault();
 
-    dispatch(setIsFavoriteAction({
+    await dispatch(setIsFavoriteAction({
       isFavorite: !isFavorite,
       offerId,
+      setIsFavorite,
     }));
+
+    await dispatch(fetchOffersAction());
 
     if (authorizationStatus === AuthorizationStatus.NoAuth) {
       navigate(AppRoute.SignIn);
-      return;
     }
-
-    setIsFavorite(!isFavorite);
   };
 
-  const handleSignOut = () => {
+  const onSignOut = () => {
     dispatch(getReviewsAction(offerId));
   };
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <Authorization onSignOut={handleSignOut}/>
-          </div>
-        </div>
-      </header>
+      <Header onSignOut={onSignOut}/>
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                currentOffer.images.map((image) =>
+                currentOffer.images.slice(0, MaxObjectNumber.ImagesCount).map((image) =>
                   (
                     <div
                       className="property__image-wrapper"
@@ -122,7 +116,13 @@ function RentalOfferPage() {
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">To bookmarks</span>
+                  <span className="visually-hidden">
+                    {
+                      isFavorite && (authorizationStatus === AuthorizationStatus.Auth)
+                        ? BookmarkStatus.In
+                        : BookmarkStatus.To
+                    }
+                  </span>
                 </button>
               </div>
               <div className="property__rating rating">
